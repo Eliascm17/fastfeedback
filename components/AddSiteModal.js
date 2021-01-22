@@ -52,7 +52,7 @@ function AddSiteModal({ children }) {
         mutate(
             ['/api/sites', auth.user.token],
             async (data) => ({
-                sites: [...data.sites, { id, ...newSite }]
+                sites: [{ id, ...newSite }, ...data.sites]
             }),
             false
         );
@@ -123,5 +123,3 @@ function AddSiteModal({ children }) {
 }
 
 export default AddSiteModal;
-
-//adding this comment to test checkly browser check

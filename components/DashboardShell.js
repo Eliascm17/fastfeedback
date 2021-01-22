@@ -19,7 +19,12 @@ const DashboardShell = ({ children }) => {
     const { user, signout } = useAuth();
     return (
         <Box backgroundColor="gray.100" h="100vh">
-            <Flex backgroundColor="white" mb={16} w="full">
+            <Flex
+                backgroundColor="white"
+                mb={16}
+                w="full"
+                borderTop="5px solid #0AF5F4"
+            >
                 <Flex
                     alignItems="center"
                     justifyContent="space-between"
@@ -30,7 +35,7 @@ const DashboardShell = ({ children }) => {
                     w="full"
                     px={8}
                 >
-                    <Flex>
+                    <Flex align="center">
                         <NextLink href="/" passHref>
                             <Logo boxSize="24px" mr={8} />
                         </NextLink>
@@ -42,13 +47,27 @@ const DashboardShell = ({ children }) => {
                         </NextLink>
                     </Flex>
                     <Flex justifyContent="center" alignItems="center">
-                        <Button
-                            variant="ghost"
-                            mr={2}
-                            onClick={() => signout()}
-                        >
-                            Log Out
-                        </Button>
+                        {user && (
+                            <>
+                                <NextLink href="/account" passHref>
+                                    <Button as="a" variant="ghost" mr={2}>
+                                        Account
+                                    </Button>
+                                </NextLink>
+                                <NextLink href="/" passHref>
+                                    <Button
+                                        as="a"
+                                        onClick={(e) => {
+                                            signout(e);
+                                        }}
+                                        variant="ghost"
+                                        mr={2}
+                                    >
+                                        Log out
+                                    </Button>
+                                </NextLink>
+                            </>
+                        )}
                         <Avatar size="sm" src={user?.photoUrl} />
                     </Flex>
                 </Flex>
